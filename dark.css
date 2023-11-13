@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Roboto:wght@100;400;700&display=swap");
+
+body {
+  font-family: "Comfortaa", cursive;
+  background-color: #141415;
+}
+.application-name {
+  color: #fbb200;
+  font-size: 18px;
+}
+.application-version {
+  color: #fbb200;
+  font-size: 12px;
+}
+.action {
+  color: #fbb200;
+}
+.action-error {
+  color: red;
+}
