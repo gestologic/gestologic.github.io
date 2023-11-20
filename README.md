@@ -2,7 +2,7 @@
 
 Gestologic by Juan Agustin Coutinho
 
-gestologic.github.io
+gestologic.com.ar
 
 Licensed under CC BY-NC-ND 4.0
 
