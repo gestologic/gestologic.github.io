@@ -8,6 +8,14 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+.green-color {
+  color: green; /* Cambia el color a verde */
+}
+
+.red-color {
+  color: red; /* Cambia el color a verde */
+}
+
 .video-container {
   position: relative;
   overflow: hidden;
@@ -67,7 +75,7 @@ figure {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 900px;
 }
 
 .custom-iframe {
@@ -1650,6 +1658,7 @@ table {
 
 table.default {
   width: 100%;
+  border-collapse: collapse; /* Combina bordes de celdas para una apariencia más limpia */
 }
 
 table.default tbody tr:nth-child(2n + 2) {
@@ -1657,10 +1666,12 @@ table.default tbody tr:nth-child(2n + 2) {
 }
 
 table.default td {
+  border: 1px solid #ddd; /* Añade un borde de 1 píxel gris a cada celda */
   padding: 0.5em 1em 0.5em 1em;
 }
 
 table.default th {
+  border: 1px solid #ddd; /* Añade un borde de 1 píxel gris a cada celda */
   text-align: left;
   font-weight: 400;
   padding: 0.5em 1em 0.5em 1em;
