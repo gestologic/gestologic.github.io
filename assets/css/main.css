@@ -8,6 +8,30 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+.small-button {
+  background-color: #FBB200;
+  color: #fff;
+  font-size: 0.8em;
+  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+  text-decoration: none; /* Elimina el subrayado del enlace */
+  font-weight: bold;
+  padding: 1em 1em;
+  border: 1px solid #FBB200; /* Añade un borde del mismo color que el fondo */
+  border-radius: 0.25em;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para simular relieve */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.small-button:hover {
+  background-color: #ffe29a; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
+
+.table-container { /* Tabla con slide horizontal */
+  overflow-x: auto;
+  max-width: 100%;
+}
+
 .green-color {
   color: green; /* Cambia el color a verde */
 }
@@ -1684,6 +1708,10 @@ table.default thead {
 
 table.default tfoot {
   background: #eee;
+}
+
+table.default img {
+  max-height: 150px; /* Tamaño máximo de la imagen */
 }
 
 /* Form */
