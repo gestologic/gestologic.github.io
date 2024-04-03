@@ -2,6 +2,15 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,900");
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;700;900&display=swap");
 
+.console {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  border: 2px solid #fbb200;
+}
+
 /*
 	Escape Velocity by HTML5 UP
 	html5up.net | @ajlkn
@@ -9,25 +18,27 @@
 */
 
 .small-button {
-  background-color: #FBB200;
+  background-color: #fbb200;
   color: #fff;
   font-size: 0.8em;
   text-transform: uppercase; /* Convierte el texto a mayúsculas */
   text-decoration: none; /* Elimina el subrayado del enlace */
   font-weight: bold;
   padding: 1em 1em;
-  border: 1px solid #FBB200; /* Añade un borde del mismo color que el fondo */
+  border: 1px solid #fbb200; /* Añade un borde del mismo color que el fondo */
   border-radius: 0.25em;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para simular relieve */
   cursor: pointer;
   transition: background-color 0.3s ease;
+  line-height: 1; /* Igual al valor del padding */
 }
 
 .small-button:hover {
   background-color: #ffe29a; /* Cambia el color de fondo al pasar el ratón sobre el botón */
 }
 
-.table-container { /* Tabla con slide horizontal */
+.table-container {
+  /* Tabla con slide horizontal */
   overflow-x: auto;
   max-width: 100%;
 }
