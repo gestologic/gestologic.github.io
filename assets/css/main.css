@@ -54,7 +54,7 @@
 .video-container {
   position: relative;
   overflow: hidden;
-  max-width: 400px; /* Establece el tamaño máximo deseado */
+  max-width: 800px; /* Establece el tamaño máximo deseado */
   width: 100%;
   margin: 0 auto; /* Centra el contenedor horizontalmente */
   margin-bottom: 30px; /* Ajusta el espacio entre el iframe y el texto según tus necesidades */
