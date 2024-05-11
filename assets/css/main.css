@@ -2,6 +2,73 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,900");
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;700;900&display=swap");
 
+.benefits {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.benefits ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+
+.benefits li {
+  margin-bottom: 10px;
+}
+
+.cta {
+  flex: 1;
+  padding: 20px;
+  background-color: #fbb200;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cta h2 {
+  margin-top: 0;
+}
+
+.cta a {
+  display: inline-block;
+  color: #fbb200;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.plan {
+  background-color: #f2f2f2;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.plan h2 {
+  margin-bottom: 10px;
+}
+
+.plan p {
+  margin-bottom: 20px;
+}
+
+.plan img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
 /* Estilos para el contenedor y las imágenes */
 .inline {
   display: flex; /* Usa el modelo de caja flex para alinear elementos en línea */
