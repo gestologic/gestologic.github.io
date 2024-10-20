@@ -136,6 +136,15 @@
   margin-bottom: 30px; /* Ajusta el espacio entre el iframe y el texto según tus necesidades */
 }
 
+.video-container-small {
+  position: relative;
+  overflow: hidden;
+  max-width: 400px; /* Establece el tamaño máximo deseado */
+  width: 100%;
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  margin-bottom: 30px; /* Ajusta el espacio entre el iframe y el texto según tus necesidades */
+}
+
 .image-responsive-maxheight400 {
   max-width: 100%; /* La imagen no será más ancha que el contenedor padre */
   height: auto; /* La altura se ajusta automáticamente para mantener la relación de aspecto */
