@@ -1,0 +1,411 @@
+/*
+  Gestologic — capa de modernización visual.
+  Se carga DESPUÉS de main.css y sólo agrega: tokens de marca, profundidad,
+  contraste accesible y micro-interacciones. No reemplaza el tema base.
+  Sin animaciones ligadas al scroll: se probaron y se descartaron por
+  inestables. Todo lo de acá es CSS estático, soportado por cualquier navegador.
+*/
+
+:root {
+  /* Paleta de marca */
+  --gl-amber: #fbb200;
+  --gl-ink: #484d55;
+  --gl-ink-dark: #2f333b;
+  --gl-surface: #fff;
+
+  /* Sombras en capas, para profundidad suave en lugar de una sombra dura */
+  --gl-shadow-sm: 0 1px 2px rgb(47 51 59 / 6%), 0 2px 6px rgb(47 51 59 / 6%);
+  --gl-shadow-md: 0 2px 4px rgb(47 51 59 / 6%), 0 8px 20px rgb(47 51 59 / 10%);
+  --gl-shadow-lg: 0 4px 8px rgb(47 51 59 / 8%), 0 16px 40px rgb(47 51 59 / 14%);
+
+  --gl-radius: 0.75em;
+  --gl-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ---------------------------------------------------------------- Base --- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* El nav es fijo: los anclas deben frenar por debajo de él */
+:target,
+[id] {
+  scroll-margin-block-start: 6rem;
+}
+
+::selection {
+  background: var(--gl-amber);
+  color: #fff;
+}
+
+/* Anillo de foco visible y consistente para navegación por teclado */
+:where(a, button, .button, input, textarea, select):focus-visible {
+  outline: 3px solid var(--gl-ink-dark);
+  outline-offset: 3px;
+}
+
+/* -------------------------------------------------------- Tipografía --- */
+
+:where(h1, h2, h3, .title) {
+  text-wrap: balance;
+}
+
+:where(.container p, .feature-list p) {
+  text-wrap: pretty;
+}
+
+/*
+  El subtítulo de sección venía en #b1b4b9: sobre blanco queda al límite de lo
+  legible y sobre el fondo ámbar directamente se lava. Se oscurece en cada caso
+  hasta pasar el contraste mínimo de WCAG AA.
+*/
+header.style1 p {
+  color: #666b73;
+}
+
+.wrapper.style1 header.style1 p {
+  color: #57491a;
+}
+
+/* En el footer oscuro el subtítulo va al revés: aclarado */
+#footer header.style1 p {
+  color: #c9ccd1;
+}
+
+/* ------------------------------------------------------- Enlaces --- */
+/*
+  Los enlaces de texto heredaban el color del párrafo y no se distinguían de
+  texto común. Se les da color de hipervínculo, elegido para pasar contraste
+  AA sobre los cuatro fondos del sitio (ámbar 5.71:1, crema 7.10:1,
+  blanco 8.63:1, gris 7.78:1). El azul clásico #1565c0 no servía: da 3.80:1
+  sobre el ámbar del intro.
+  Quedan afuera botones, íconos y enlaces que envuelven imágenes. El footer
+  no se toca: su regla #footer a (mayor especificidad) los mantiene blancos,
+  que ya contrastan sobre el fondo oscuro.
+*/
+
+.container a:not(.button, .small-button, .ig-follow, .image, .icon) {
+  color: #0d47a1;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/*
+  El tema pinta `strong, b` de gris fijo, así que un <strong> dentro de un
+  enlace anulaba el color del enlace. Se fuerza la herencia.
+*/
+.container a:not(.button, .small-button, .ig-follow, .image, .icon) :where(strong, b, em, span) {
+  color: inherit;
+}
+
+.container a:not(.button, .small-button, .ig-follow, .image, .icon):hover {
+  color: #1565c0;
+  text-decoration-thickness: 2px;
+}
+
+/*
+  Cuando el enlace envuelve un título de tarjeta, el subrayado se propagaba al
+  encabezado y quedaba pesado. Se reserva para el hover.
+*/
+.container a:not(.button, .small-button, .ig-follow, .image, .icon):has(h1, h2, h3, h4) {
+  text-decoration: none;
+}
+
+.container a:not(.button, .small-button, .ig-follow, .image, .icon):has(h1, h2, h3, h4):hover :where(h1, h2, h3, h4) {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/*
+  Cuando un header.style1 es lo primero de la sección, sus 3em de padding
+  superior se suman al espacio que ya deja la solapa del título, y esa sección
+  queda más separada que las que arrancan con un párrafo o una imagen.
+  Se anula ese padding sólo en esa posición, para igualar el arranque de todas
+  las secciones. El footer queda afuera: ahí el logo de YouTube va en el medio
+  y su espaciado responde a otra estructura.
+*/
+.wrapper:not(#footer) > .container > header.style1:first-child,
+.wrapper:not(#footer) > .container > section:first-child > header.style1:first-child {
+  padding-top: 0;
+}
+
+/* -------------------------------------------------------------- Nav --- */
+
+#nav > ul {
+  background-color: rgb(47 51 59 / 82%);
+  backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: var(--gl-shadow-md), inset 0 0 0 1px rgb(255 255 255 / 12%);
+  transition: background-color 0.3s var(--gl-ease);
+}
+
+#nav > ul > li > a {
+  transition: color 0.2s var(--gl-ease);
+}
+
+/* --------------------------------------------------------- Botones --- */
+
+.button,
+.small-button {
+  transition:
+    transform 0.2s var(--gl-ease),
+    box-shadow 0.2s var(--gl-ease),
+    background-color 0.2s var(--gl-ease);
+  will-change: transform;
+}
+
+.button.style1 {
+  box-shadow: var(--gl-shadow-md);
+}
+
+:where(.button, .small-button):hover {
+  transform: translateY(-2px);
+  box-shadow: var(--gl-shadow-lg);
+}
+
+:where(.button, .small-button):active {
+  transform: translateY(0);
+  box-shadow: var(--gl-shadow-sm);
+}
+
+/* ------------------------------------------------- Tarjetas y cajas --- */
+
+/* Tarjetas de características: elevación al pasar el mouse */
+.feature-list section {
+  border-radius: var(--gl-radius);
+  transition:
+    transform 0.25s var(--gl-ease),
+    background-color 0.25s var(--gl-ease);
+}
+
+.feature-list section:hover {
+  transform: translateY(-3px);
+  background-color: rgb(251 178 0 / 5%);
+}
+
+/* La chapita del ícono toma el degradé de la marca al pasar el mouse */
+.feature-list h3:before {
+  transition:
+    background-color 0.25s var(--gl-ease),
+    transform 0.25s var(--gl-ease);
+}
+
+.feature-list section:hover h3:before {
+  background-color: var(--gl-amber);
+  transform: scale(1.08);
+}
+
+/*
+  Párrafo de cierre de una grilla de características. Toma la misma separación
+  que tenía el `ul.actions` que ocupaba antes ese lugar, para que no quede
+  pegado a la última tarjeta.
+*/
+.section-closing {
+  margin-top: 5em;
+  text-align: center;
+}
+
+@media screen and (max-width: 736px) {
+  .section-closing {
+    margin-top: 4em;
+  }
+}
+
+/* --------------------------------------------------------- Imágenes --- */
+
+:where(.image-responsive-maxheight400, .image-responsive-maxheight700) {
+  border-radius: var(--gl-radius);
+  box-shadow: var(--gl-shadow-lg);
+}
+
+.image.featured img,
+.highlight img {
+  border-radius: calc(var(--gl-radius) / 1.5);
+  transition:
+    transform 0.3s var(--gl-ease),
+    box-shadow 0.3s var(--gl-ease);
+}
+
+.image.featured:hover img,
+.highlight:hover img {
+  transform: scale(1.02);
+  box-shadow: var(--gl-shadow-lg);
+}
+
+/* --------------------------------- Sección de anuncio de la versión 2 --- */
+/*
+  Los tamaños p.style1/2/3 del tema están acotados a #intro. Esta sección
+  reutiliza la misma jerarquía tipográfica, con colores adaptados a su fondo
+  claro en vez del ámbar del intro.
+*/
+
+#v2-anuncio {
+  text-align: center;
+}
+
+/* Ritmo vertical uniforme: todos los bloques separados por la misma distancia */
+#v2-anuncio .container > * {
+  margin-block: 3.5rem;
+}
+
+#v2-anuncio .container > *:first-child {
+  margin-block-start: 0;
+}
+
+#v2-anuncio .container > *:last-child {
+  margin-block-end: 0;
+}
+
+#v2-anuncio p.style1 {
+  font-size: 1.5em;
+  letter-spacing: 0.075em;
+  color: var(--gl-ink);
+}
+
+#v2-anuncio p.style2 {
+  font-weight: 700;
+  color: var(--gl-ink-dark);
+  border-radius: 0.35em;
+  box-shadow: inset 0 0 0 1px rgb(47 51 59 / 10%);
+  font-size: 2.25em;
+  line-height: 1.35em;
+  padding: 1em 0.5em;
+}
+
+#v2-anuncio p.style3 {
+  font-size: 1.1em;
+  max-width: 48em;
+  margin: 0 auto;
+  color: var(--gl-ink);
+}
+
+/* ------------------------------------------- Tarjeta de Instagram --- */
+/*
+  Bloque estático, sin scripts de terceros: no depende de la API de Meta,
+  no carga trackers y no puede romperse si Instagram cambia sus embeds.
+*/
+
+.ig-card {
+  /* Medidas en rem: la tarjeta debe verse igual en cualquier sección,
+     sin heredar el escalado tipográfico del contenedor que la contiene. */
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  width: 100%;
+  max-width: 36rem;
+  margin: 2.5rem auto;
+  padding: 1.75rem 2rem;
+  font-size: 1rem;
+  text-align: left;
+  background: var(--gl-surface);
+  border-radius: var(--gl-radius);
+  box-shadow: var(--gl-shadow-md);
+  transition:
+    transform 0.2s var(--gl-ease),
+    box-shadow 0.2s var(--gl-ease);
+}
+
+.ig-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--gl-shadow-lg);
+}
+
+/* Aro degradé de Instagram alrededor del avatar */
+.ig-card .ig-avatar {
+  flex: 0 0 auto;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(from 20deg, #f9ce34, #ee2a7b, #6228d7, #f9ce34);
+}
+
+.ig-card .ig-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+  border: 2px solid #fff;
+}
+
+.ig-card .ig-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ig-card .ig-handle {
+  display: block;
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--gl-ink-dark) !important;
+  text-transform: none;
+}
+
+.ig-card .ig-meta {
+  display: block;
+  margin: 0.4rem 0 1.1rem 0;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: #666b73;
+  text-transform: none;
+}
+
+/* Botón "Seguir" con el degradé de la marca Instagram */
+.ig-card .ig-follow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(80deg, #f9ce34, #ee2a7b 55%, #6228d7);
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: var(--gl-shadow-sm);
+  transition: filter 0.2s var(--gl-ease);
+}
+
+.ig-card .ig-follow:hover {
+  filter: brightness(1.08);
+}
+
+.ig-card .ig-follow:before {
+  font-size: 1.25em;
+}
+
+@media screen and (max-width: 480px) {
+  .ig-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1em;
+  }
+
+  .ig-card .ig-body {
+    width: 100%;
+  }
+}
+
+/* ------------------------------------------------------- Responsive --- */
+
+@media screen and (max-width: 736px) {
+  /* En pantallas chicas el hover no aplica: sin transformaciones al tocar */
+  .feature-list section:hover,
+  :where(.button, .small-button):hover {
+    transform: none;
+  }
+}
