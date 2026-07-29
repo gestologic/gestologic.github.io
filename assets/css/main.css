@@ -153,6 +153,14 @@
   max-height: 400px; /* Tamaño máximo de la imagen */
 }
 
+.image-responsive-maxheight700 {
+  max-width: 100%; /* La imagen no será más ancha que el contenedor padre */
+  height: auto; /* La altura se ajusta automáticamente para mantener la relación de aspecto */
+  display: block; /* Elimina el espacio extra por debajo de la imagen al usar display: block */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+  max-height: 700px; /* Tamaño máximo de la imagen */
+}
+
 .image-responsive-maxheight50 {
   max-width: 100%; /* La imagen no será más ancha que el contenedor padre */
   height: auto; /* La altura se ajusta automáticamente para mantener la relación de aspecto */
@@ -2400,6 +2408,22 @@ ul.actions.special {
   height: 40em;
 }
 
+/* La sección de Descargas lleva la imagen de la nueva versión como portada */
+.downloads #header {
+  background-image: url("../../images/header-v2-office.jpg");
+}
+
+/* Oscurece la foto de la nueva portada, donde el logo compite con la escultura */
+.downloads #header:before {
+  background: url("images/overlay.png"), rgba(0, 0, 0, 0.45);
+}
+
+.homepage #logo p.tagline-v2 {
+  color: #fbb200;
+  font-weight: 700;
+  margin-top: 0.5em;
+}
+
 /* Logo */
 
 #logo {
@@ -2573,11 +2597,13 @@ ul.actions.special {
 
 /* Features */
 
-#features header.style1 {
+#features header.style1,
+#features-v2 header.style1 {
   padding-bottom: 5em;
 }
 
-#features ul.actions {
+#features ul.actions,
+#features-v2 ul.actions {
   margin-top: 5em;
 }
 
@@ -3150,6 +3176,10 @@ ul.actions.special {
     font-size: 1em;
     max-width: 30em;
     margin: 0 auto;
+    /* Permite que los textos largos ocupen varias líneas sin desbordar el botón */
+    height: auto;
+    line-height: 1.5;
+    padding: 1.25em 1.5em;
   }
 
   /* Actions */
@@ -3269,11 +3299,13 @@ ul.actions.special {
 
   /* Features */
 
-  #features header.style1 {
+  #features header.style1,
+  #features-v2 header.style1 {
     padding-bottom: 4em;
   }
 
-  #features ul.actions {
+  #features ul.actions,
+  #features-v2 ul.actions {
     margin-top: 4em;
   }
 
